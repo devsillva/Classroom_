@@ -1277,36 +1277,4 @@
        # O segundo cochete é o segundo item da lista
 #soma = estoque[0][1] + estoque[1][1] + estoque[2][1]
 
-#print(f"\nA soma dos itens em estoque é: {soma}")
-
-#------------------------------------------------------------------------------------------------------------
-
-# Vetores
-
-#numeros = int(input("\nQuantos números serão guardados?\nR: "))
-
-#vet = [0 for x in range(numeros)]
-
-#for i in range(0, numeros):
-#    vet[i] = int(input(f"\nDigite {i + 1}° numero: "))
-
-#print("\nNUMEROS DIGITADOS:")
-#for i in range(numeros):
-#    print(f"{vet[i]}")
-    
-
-
-pesos = int(input("\nQuantas series foram feitas no treino de costas?\nR: ")) # Variavel para coletar quantos itens será atribuido na lista
-
-vet = [0 for x in range(pesos)] # Cria lista de zeros de acordo com a quantidade definida na variavel (pesos) Ex: pesos = 4; vet = 0, 0, 0, 0
-
-for k in range(pesos): # Em cada "volta" na variavel peso;
-    
-    vet[k] = int(input(f"\nDigite o {k +1}° peso: ")) # A variavel "vet[k]" significa que o input vai subtituir a posição do k na lista vet;
-
-print(f"\nForam registrados no treino de hoje:\n") # Mostrando o resultado
-
-for k in range(pesos): # Para cada "volta" determinada pela variavel (pesos);
-    
-    print(f"A {k +1}° serie foi com {vet[k]} kg") # Imprime o valor (qntd da variavel pesos) vezes, mostrando os valores digitados 
-
+print(f"\nA soma dos itens em estoque é: {soma}")

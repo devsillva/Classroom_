@@ -1263,18 +1263,18 @@
 # produto e o total de itens no estoque somando todas as quantidades
 
 
-estoque = [
+#estoque = [
 #[Nome, Qtd]
-["Teclado", 50],
-["Mouse", 100],
-["Monitor", 20]
-]
+#["Teclado", 50],
+#["Mouse", 100],
+#["Monitor", 20]
+#]
                     
-print(f"\nProduto: {estoque[0]}") # linha 0 inteira
-print(f"\nProduto: {estoque[1]}")
-print(f"\nProduto: {estoque[2]}")
+#print(f"\nProduto: {estoque[0]}") # linha 0 inteira
+#print(f"\nProduto: {estoque[1]}")
+#print(f"\nProduto: {estoque[2]}")
 
        # O segundo cochete é o segundo item da lista
-soma = estoque[0][1] + estoque[1][1] + estoque[2][1]
+#soma = estoque[0][1] + estoque[1][1] + estoque[2][1]
 
-print(f"\nA soma dos itens em estoque é: {soma}")
+#print(f"\nA soma dos itens em estoque é: {soma}")

@@ -1437,20 +1437,137 @@
 # operador de união (|) para exibir todos os alunos matriculados e o de interseção
 # (&) para exibir quem estuda nas duas turmas.
 
-conj_1 = set()
-turma_python = {"nicolas", "lucas", "miguel", "joao"}
+# conj_1 = set()
+# turma_python = {"nicolas", "lucas", "miguel", "joao"}
 
-conj_2 = set()
-turma_java = {"nicolas", "lucas", "felipe", "maringonda"}
+# conj_2 = set()
+# turma_java = {"nicolas", "lucas", "felipe", "maringonda"}
 
-soma_turmas = turma_python | turma_java
+# soma_turmas = turma_python | turma_java
 
-ambas_turmas = turma_python & turma_java
+# ambas_turmas = turma_python & turma_java
 
-print(f"O total de alunos são: {len(soma_turmas)}")
-print(f"{soma_turmas}")
-print(f"\nOs alunos que frequentam ambas as turmas são: {ambas_turmas}")
+# print(f"O total de alunos são: {len(soma_turmas)}")
+# print(f"{soma_turmas}")
+# print(f"\nOs alunos que frequentam ambas as turmas são: {ambas_turmas}")
 
+# -----------------------------------------------------------------------------------------------------------------------
 
+#Felipe Santos Monari, RGM 48285871 - Líder de Fluxo e Menu 
+#Lucas Rafael Chimentão Alvarenga, RGM 47700033, Criação do dicionario e pag 29 - 39. - Gestor de Inventario 
+#Miguel Siqueira de Carvalho, RGM 47933194, pag 42 - pag 75. - Operador de Saída
+#Nicolas Henrique da Silva, RGM 47684755, pag  Registrador de Histórico, 
+#Nicholas D Amato, RGM - Analista de Sorteios e QA
+
+#Após cada integrante terminar suas respectivas funções na criação do sistema, todos se reuniram e estruturaram o codigo junto, então além
+#de cada um criar o seu, no fim todos se ajudaram na junção dos codigos. 
+
+#importação da biblioteca random para o sorteio
+import random
+
+#-Dicionario feito por Lucas-
+#dicionário com os itens em estoque (itens retirados de um estoque real)
+estoque = {"Antena" : 730, "BlockPower" : 1725, "Cb5.40" : 3420, 
+            "Chapa" : 125, "Conector" : 9321, "Cp5" : 2730,
+              "Modulo" : 410, "Suporte" : 212, "Teclado" : 4115, 
+              "Terminal" : 5974, "Trava" : 366,
+              }
+
+# Lista feita pelo Nicolas
+# Essa lista serve para armazenar os itens retirados e mostra-los no histórico de movimentações
+historico = []
+
+#-Felipe começa aqui = fiz o laço While principal, os if, elif e else das opções que o usuario irá escolher-
+#aqui começa o laço While True mostrando as opções de consulta ao usuario
+while True:
+
+    #aqui mostra cada tipo de consulta que pode ser feita
+    print("\n===== SISTEMA DE ALMOXARIFADO =====")
+    print("1 - Consultar itens em estoque")#aqui consulta os itens que tem em estoque
+    print("2 - Retirar item")#aqui para fazer a retirada de itens do estoque
+    print("3 - Ver histórico de movimentação")#aqui para ver as movimentações que tiveram
+    print("4 - Sair e realizar o sorteio")#e aqui para realizar o sorteio do brinde e finalizar o programa
+    
+    escolha = input("\nEscolha uma das opções acima: ")#aqui para o usuario digitar a opção que ele deseja consultar, usando 1, 2, 3 ou 4 em formato de string. após a escolha o usuário vai para a estrutura condicional que ele escolheu, dando continuidade na operação com o resto do código
+
+#-Lucas Começa aqui-
+#se for selecionado a opção 1 mostrará os itens em estoque
+    if escolha == "1":
+        print("\n===== Consulta de itens em Estoque =====\n")
+        for chave, valor in estoque.items():   # Aqui cria um laço que percorre o dicionario e o ".itens" retorna para o usuario os pares do dicionario #Chave - são as chaves do dicionario (Os nomes dos produtos). Valor - são os valores associados as chaves (As quantidades de cada produto). 
+            print(f"{chave.upper()}: {valor}") #aqui o sistema exibe os produtos e valores que estão no dicionario.
+
+        nova_escolha = input("\nDeseja voltar ao menu de opções? (s/n)\nR: ") #O sistema exibe a opção de voltar ao menu ou sair.
+        if nova_escolha == "s": #Caso o usuario escolha a opção "S", o sistema volta ao menu normalmente.
+            continue
+        else: #Caso o usuario escolha a opção "N", o sistema exibe a mensagem de "FIM DO PROGRAMA" e o sistema se encerra.
+            print("\n--- FIM DO PROGRAMA ---")
+            break             
+#-Aqui finaliza a parte de Lucas-
+
+#-Miguel Começa aqui-
+#se for a opção 2 dará a opção de retirar algum item do estoque e atualizará o historico de movimentação
+    elif escolha == "2":
+        print("===== Retirada de itens em Estoque ====\n")
+
+        #Aqui comeca um laço de repetição, onde foi criado duas variaveis para mostrar a chave e o valor referente a chave dentro do dicionario.
+        for chave, valor in estoque.items(): 
+            print(f"{chave.upper()}: {valor}")
+
+        #Aqui crio uma variavel e solicito que seja inserido o valor dela.
+        item = input("\nQual item voce gostaria de remover?: ").capitalize() #Todas as respostas, a primeira letra sera em letra maiuscula.
+
+        #Aqui eu comeco o laco de repetição baseado no valor da variavel inserida acima.
+        while item not in estoque: ##Caso o valor digitado não esteja, ira retornar a pergunta até inserir um valor que seja compativel com a chave do dicionario
+            print("Item não encontrado")
+            item = input("Qual item voce gostaria de remover?: ").capitalize()
+
+        print(f"Quantidade disponivel: {estoque[item]}")#Aqui ira mostrar a quantidade no estoque da chave inserida a cima.
+
+        if item in estoque: #Se o valor recebido estiver dentro do dicionario, ele executa a proxima pergunta.  
+            sub = int(input("\nAgora digite quantas unidades voce vai querer retirar: ")) #Aqui declado a variavel sub de 'subtração', onde o usuario vai digitar o valor que sera removido.
+        
+        while sub >= estoque[item]: #Aqui inicia um laco de repetição onde se o valor digitado na pergunta acima for maior que tiver no estoque, ele repete a pergunta.
+            print("Valor maior que disponivel no estoque")
+            sub = int(input("Agora digite quantas unidades voce vai querer retirar: "))
+
+        if sub <= estoque[item]: #Aqui valida que se o valor digitado for nor que tem em estoque, ele continua o calculo, subtraindo o valor digitado com o estoque.
+            print(f"\nItem atualizado com SUCESSO!") #Valida para o usuario que deu certo a operação e que foi "atualizado" o estoque.
+            item_historico = (f"Retirado {sub} unidades do(a) {item}") #Aqui crio uma variavel e mostro para o usuario quantos itens foram retirados e de qual produto.
+            historico.append(item_historico) #Aqui adiciona no final da lista historico
+            print(f"Retirado {sub} unidades do(a) {item}") #Aqui insere a mensagem que ficara salva na lista historico
+            estoque[item] = estoque[item] - sub #Faz a subtração do valor digitado com o valor da chave selecionada dentro do dicionario estoque.
+        print(f"Total restante: {estoque[item]}") #retorna para o usuario o valor da quantidade restante no estoque.
+#Aqui finaliza a parte do MIGUEL SIQUEIRA
+
+# Nicolas começa aqui:
+    elif escolha == "3": # Caso o usuário escolha a opção 3 mostra o histórico de movimentações em estoque 
+        print("\n===== Histórico de movimentação do Estoque ====") # imprime o titulo do historico de movimentações
+        if len(historico) <= 0: # Se o usuário tentar consultar o historico sem fazer nenhuma retirada de itens abre-se essa condição que faz a contagem (len) do historico e se for <=0:
+            print("\nNenhuma movimentação registrada") # Se a contagem de itens no historico for <=0: imprime essa mensagem
+            continue # 0 continue faz com que retorne ao laço while de novo (menu)
+        else: #Se a contagem (len) da lista (histórico) for >=0
+            for movimento in historico: # Aqui o laço de repetição vai passar por todos os itens dentro da lista (historico)
+                print(movimento) # E vai imprimi-los em forma de "cascata"
+# Nicolas termina aqui.
+
+#e a opção 4 realiza o sorteio e finaliza o programa   
+    elif escolha == "4": 
+        print("\n===== Sair e realizar o Sorteio =====")
+        
+        if len(historico) > 0:
+            sorteio = random.choice(historico)
+            
+            print("===== SORTEIO =====")
+            print(f"O sorteado da rodada, baseado na movimentação [{sorteio}], ganhou um brinde!")
+        
+        else:
+            print("\nNão houve movimentação no estoque para realizar o sorteio.")
+         #como foi selecionada essa opção, esse break encerra o promada depois do sorteio
+            break
+        
+#se o usuario escolher alguma opção que não tenha o código informa invalida e pede para escolher novamente.
+    else:
+        print("\nOpção inválida! Escolha novamente.")
 
 

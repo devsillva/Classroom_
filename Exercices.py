@@ -1654,12 +1654,68 @@
 
 #--------------------------------------------------------------------------------------------------------------------------
 
-# Estudando def python
+# Criando titulo para os exercicios que irei fazer daqui pra frente
  
-def titulo():
-  print("----- EXERCICIO -----")
+# def titulo():
+#   print("----- EXERCICIO -----")
 
 
 
-titulo()
+# titulo()
+
+#----------------------------------------------------------------------------------------------------------------------------
+
+#pratica do def
+
+# def mensagem(msg):
+#     print("---------------")
+#     print(msg)
+#     print("---------------")
+
+# mensagem("Olá, mundo!")
+
+# def soma(a, b):
+#   print(f"A = {a} e B = {b}")
+#   s = a + b
+#   print(f"A soma de A + B = {s}\n")
+
+
+
+# def contador(* num):
+#   print(num)
+
+
+# def dobra(lst):
+#   posicao = 0
+#   while posicao < len(lst):
+#     lst[posicao] *= 2
+#     posicao += 1
+
+
+# valores = [6, 5, 4, 3, 8]
+# dobra(valores)
+
+''' 
+    Faça um programa que tenha uma função chamada area()
+    que receba as dimensoes de um terreno retangular (largura e comprimento)
+    e mostre a area do terreno
+'''
+
+def area(l, c):
+
+    a = l * c
+
+    print(f"\nA área de um terreno {l} x {c} é de {a:.1f}m²")
+
+    
+print("----------------------------")
+print("--- Controle de Terrenos ---")
+print("----------------------------\n")
+
+larg = float(input("LARGURA (m): "))
+comp = float (input("COMPRIMENTO (m): "))
+
+area(larg, comp)
+
+
 

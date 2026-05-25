@@ -1573,85 +1573,93 @@
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 
-# Faça um programa que leia 4 notas e calcula a média destas 4 notas. 
+# # Faça um programa que leia 4 notas e calcula a média destas 4 notas. 
 
-def exibir_bemvindo(): 
+# def exibir_bemvindo(): 
 
-  print ("--------------------------------------------") 
-  print ("- BEM VINDO AO PROGRAMA QUE CALCULA MEDIAS -") 
-  print ("--------------------------------------------\n") 
+#   print ("--------------------------------------------") 
+#   print ("- BEM VINDO AO PROGRAMA QUE CALCULA MEDIAS -") 
+#   print ("--------------------------------------------\n") 
 
  
-def capturar_nota(num): 
+# def capturar_nota(num): 
   
-  nota = float(input(f"Digite a Nota {num}: ")) 
-  exibir_traco() 
-  return nota 
+#   nota = float(input(f"Digite a Nota {num}: ")) 
+#   exibir_traco() 
+#   return nota 
 
 
-def exibir_traco(): 
-  print ("--------------------------------------------\n") 
-
- 
-def somar_notas(nota1, nota2, nota3, nota4): 
-  soma_notas = (nota1 + nota2 + nota3 + nota4) 
-  return soma_notas 
+# def exibir_traco(): 
+#   print ("--------------------------------------------\n") 
 
  
-def calcular_media(soma, qtd): 
-  media = soma / qtd 
-  return media 
-
-
-def exibir_media(media): 
-  print(f"A Media do Aluno foi {media}") 
+# def somar_notas(nota1, nota2, nota3, nota4): 
+#   soma_notas = (nota1 + nota2 + nota3 + nota4) 
+#   return soma_notas 
 
  
-def encerramento(): 
-    print("\n-----------------------------------------------") 
-    print("            --- FIM DO PROGRAMA ---            ") 
-    print("-----------------------------------------------") 
+# def calcular_media(soma, qtd): 
+#   media = soma / qtd 
+#   return media 
+
+
+# def exibir_media(media): 
+#   print(f"A Media do Aluno foi {media}") 
 
  
-# Criando a lista  
-lista_notas = [] 
+# def encerramento(): 
+#     print("\n-----------------------------------------------") 
+#     print("            --- FIM DO PROGRAMA ---            ") 
+#     print("-----------------------------------------------") 
 
  
-
-#Captura as Notas do Aluno 
-exibir_bemvindo() 
-
- 
-for i in range(1, 5): 
-
-    notas = capturar_nota(i) 
-
-    lista_notas.append(notas) 
-
-    print(lista_notas) 
+# # Criando a lista  
+# lista_notas = [] 
 
  
 
-    ''' 
-nota1 = capturar_nota(1) 
-nota2 = capturar_nota(2) 
-nota3 = capturar_nota(3) 
-nota4 = capturar_nota(4) 
-
-''' 
-
-#Soma as notas e calcula a média 
-soma_notas = somar_notas(lista_notas) 
+# #Captura as Notas do Aluno 
+# exibir_bemvindo() 
 
  
-media_notas = calcular_media(soma_notas, 4) 
+# for i in range(1, 5): 
 
-#Exibe a media do Aluno na tela 
-exibir_media(media_notas) 
+#     notas = capturar_nota(i) 
 
-# Exibe o encerramento do programa 
-encerramento() 
+#     lista_notas.append(notas) 
+
+#     print(lista_notas) 
 
  
 
+#     ''' 
+# nota1 = capturar_nota(1) 
+# nota2 = capturar_nota(2) 
+# nota3 = capturar_nota(3) 
+# nota4 = capturar_nota(4) 
+
+# ''' 
+
+# #Soma as notas e calcula a média 
+# soma_notas = somar_notas(lista_notas) 
+
+ 
+# media_notas = calcular_media(soma_notas, 4) 
+
+# #Exibe a media do Aluno na tela 
+# exibir_media(media_notas) 
+
+# # Exibe o encerramento do programa 
+# encerramento() 
+
+#--------------------------------------------------------------------------------------------------------------------------
+
+# Estudando def python
+ 
+def titulo():
+  print("----- EXERCICIO -----")
+
+
+
+titulo()
 

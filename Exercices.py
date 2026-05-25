@@ -1665,7 +1665,7 @@
 
 #----------------------------------------------------------------------------------------------------------------------------
 
-#pratica do def
+# pratica do def
 
 # def mensagem(msg):
 #     print("---------------")
@@ -1699,7 +1699,8 @@
     Faça um programa que tenha uma função chamada area()
     que receba as dimensoes de um terreno retangular (largura e comprimento)
     e mostre a area do terreno
-'''
+
+
 
 def area(l, c):
 
@@ -1717,5 +1718,18 @@ comp = float (input("COMPRIMENTO (m): "))
 
 area(larg, comp)
 
+'''
 
+'''
+  Faça um programa que tenha uma função chamada escreva()
+  que receba um texto qualquer como parametro e mostre uma
+  mensagem com tamanho adaptavel'''
 
+def escreva(msg):
+    
+    print("-" * len(msg))
+    print(msg)
+    print("-" * len(msg))
+
+mensagem = input("Digite uma mensagem para ser formatada!\nR: ")
+escreva(mensagem)

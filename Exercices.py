@@ -1723,7 +1723,7 @@ area(larg, comp)
 '''
   Faça um programa que tenha uma função chamada escreva()
   que receba um texto qualquer como parametro e mostre uma
-  mensagem com tamanho adaptavel'''
+  mensagem com tamanho adaptavel
 
 def escreva(msg):
     
@@ -1733,3 +1733,57 @@ def escreva(msg):
 
 mensagem = input("Digite uma mensagem para ser formatada!\nR: ")
 escreva(mensagem)
+
+'''
+
+'''
+    Faça um programa que tenha uma função chamada contador(),
+    que receba tres parametros: inicio, fim e passo e realize a contagem.
+     
+    Seu programa tem que realizar tres contagens atraves da função criada:
+     
+    a) De 1 até 10, de 1 em 1
+    b) De 10 até 0, de 2 em 2
+    c) Uma contagem personalizada
+
+ '''
+
+#def contador(i, f, p):
+
+from time import sleep
+
+def contador(i, f, p):
+    if p < 0:
+        p *= -1
+    elif p == 0:
+        p = 1
+    print("-" * 20)
+    print(f"Contagem de {i} até {f} de {p} em {p}:")
+    sleep(1.5)
+
+    if i < f:
+        cont = i
+        while cont <= f:
+            print(f"{cont} ", end='', flush=True)
+            sleep(0.2)
+            cont += p
+
+    else:
+        cont = i
+        while cont >= f:
+            print(f"{cont} ", end="", flush=True)
+            sleep(0.2)
+            cont -= p
+
+# Programa principal
+contador(5, 50, 5)
+print("")
+print("-" * 20)
+print("Agora é sua vez de personalizar a contagem!\n")
+ini = int(input("Inicio: "))
+fim = int(input("Fim:    "))
+pas = int(input("Passo:  "))
+
+contador(ini, fim, pas)
+
+print("\n\n----- FIM DO PROGRAMA -----")

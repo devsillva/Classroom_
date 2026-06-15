@@ -2022,7 +2022,7 @@ escreva(mensagem)
 # registro e o valor é um dicionário secundário com os detalhes) para simular o banco de dados
 # do sistema.
 
-def banco_dados(id, detalhes):
+def banco_dados():
 
     estoque = {
 
@@ -2052,6 +2052,45 @@ def banco_dados(id, detalhes):
 
     }
 
+def cadastro():
+    
+    print("\n┌────────────────────┐")
+    print("│  === CADASTRO ===  │")
+    print("└────────────────────┘")
+
+    nome_produto = input("\nNome do Produto: ").title()
+
+    while True:
+        try:
+            qnt_produto = int(input("Quantidade: "))
+        except ValueError:
+            print("Digite a quantidade em NUMEROS!")
+            continue
+
+        while True:
+            try:
+                valor = float(input("Valor: "))
+            except ValueError:
+                print("Digite o valor em NUMEROS!")
+                continue
+
+            print("\nProduto registrado com sucesso!")
+
+            print(f"\nNome do produto: {nome_produto}")
+            print(f"Quantidade: {qnt_produto}")
+            print(f"Valor: {valor:.2f}")
+            break
+        break
+
+def estoque():
+
+    print("\n┌───────────────────┐")
+    print("│  === ESTOQUE ===  │")
+    print("└───────────────────┘")
+
+    
+
+
 def sistema():
 
     while True:
@@ -2074,21 +2113,12 @@ def sistema():
              continue
         
         if escolha == 1:
-            print("\n┌────────────────────┐")
-            print("│  === CADASTRO ===  │")
-            print("└────────────────────┘")
+            cadastro()
+        elif escolha == 2:
+            estoque()
 
-            nome_produto = input("\nNome do Produto: ").title()
-            try:
-                qnt_produto = int(input("Quantidade: "))
-                valor = int(input("Valor: "))
-            except ValueError:
-                print("Digite a quantidade em NUMEROS!")
-                correcao = int(input("R: "))
-                continue
 
-        
-              
 
 
 sistema()
+

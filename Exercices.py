@@ -1790,225 +1790,305 @@ escreva(mensagem)
 
 # ------------------------------------------------------------------------------------------------
 
-import random # Importa a biblioteca responsavel por escolher a aleatoriedade das palavras da forca
+# import random # Importa a biblioteca responsavel por escolher a aleatoriedade das palavras da forca
 
 
-def sortear_palavra(lista_palavras): # definindo a função do sorteamento das palavras
+# def sortear_palavra(lista_palavras): # definindo a função do sorteamento das palavras
 
-    return random.choice(lista_palavras) # Sorteia e retorna uma palavra da lista de palavras da forca
+#     return random.choice(lista_palavras) # Sorteia e retorna uma palavra da lista de palavras da forca
 
 
-def criar_palavra_oculta(palavra): # Função que cria o "_" da palavra sorteada
+# def criar_palavra_oculta(palavra): # Função que cria o "_" da palavra sorteada
 
-    palavra_oculta = [] # Cria uma lista vazia para armazenar os "_"
+#     palavra_oculta = [] # Cria uma lista vazia para armazenar os "_"
 
-    for _ in palavra:# Percorre cada letra da palavra sorteada
+#     for _ in palavra:# Percorre cada letra da palavra sorteada
 
-        palavra_oculta.append("_") # Adiciona um "_" para cada letra existente
+#         palavra_oculta.append("_") # Adiciona um "_" para cada letra existente
 
-    return palavra_oculta # Retorna a lista com a palavra escondida
+#     return palavra_oculta # Retorna a lista com a palavra escondida
 
 
-def exibir_status(palavra_oculta, vidas, letras_tentadas): # Mostra as informações atuais da partida
+# def exibir_status(palavra_oculta, vidas, letras_tentadas): # Mostra as informações atuais da partida
 
-    print("┌──────────────────┐")
-    print("│   Dica: Animal   │") # Exibe a dica do tema da forca
-    print("└──────────────────┘")
+#     print("┌──────────────────┐")
+#     print("│   Dica: Animal   │") # Exibe a dica do tema da forca
+#     print("└──────────────────┘")
 
-    print("\nPalavra:", end=" ") # Exibe o texto inicial da palavra e continua com o cursor na mesma linha
+#     print("\nPalavra:", end=" ") # Exibe o texto inicial da palavra e continua com o cursor na mesma linha
 
-    for letra in palavra_oculta: # Percorre cada caractere da palavra oculta
+#     for letra in palavra_oculta: # Percorre cada caractere da palavra oculta
 
-        print(f"{letra}", end=" ") # Mostra cada letra da palavra na mesma linha
+#         print(f"{letra}", end=" ") # Mostra cada letra da palavra na mesma linha
 
-    print(f"\nVidas: {'♥' * vidas}") # Mostra a quantidade de vidas restantes
+#     print(f"\nVidas: {'♥' * vidas}") # Mostra a quantidade de vidas restantes
 
-    if len(letras_tentadas) > 0: # Verifica se já existem letras tentadas
+#     if len(letras_tentadas) > 0: # Verifica se já existem letras tentadas
 
-        print("Letras tentadas:", end=" ") # Exibe as letras tentadas pelo jogador na mesma linha
+#         print("Letras tentadas:", end=" ") # Exibe as letras tentadas pelo jogador na mesma linha
 
-        for letra in letras_tentadas: # Percorre as letras já utilizadas
+#         for letra in letras_tentadas: # Percorre as letras já utilizadas
 
-            print(f"{letra}", end=" ") # Mostra cada letra da palavra na mesma linha
+#             print(f"{letra}", end=" ") # Mostra cada letra da palavra na mesma linha
 
-    print("\n==============================") # Separador visual
+#     print("\n==============================") # Separador visual
 
 
-def pedir_letra(): # Função responsável por pedir uma letra para o jogador
+# def pedir_letra(): # Função responsável por pedir uma letra para o jogador
 
-    while True: # Repete até que o jogador digite uma entrada válida
+#     while True: # Repete até que o jogador digite uma entrada válida
 
-        letra = input("Digite uma letra: ").upper() # Recebe a letra e converte para maiúscula
+#         letra = input("Digite uma letra: ").upper() # Recebe a letra e converte para maiúscula
 
-        if len(letra) == 1 and letra.isalpha(): # Verifica se foi digitada apenas uma letra
+#         if len(letra) == 1 and letra.isalpha(): # Verifica se foi digitada apenas uma letra
 
-            return letra # Retorna a letra digitada
+#             return letra # Retorna a letra digitada
 
-        print("Digite apenas UMA letra!\n") # Mensagem de erro caso seja inválida
+#         print("Digite apenas UMA letra!\n") # Mensagem de erro caso seja inválida
 
 
-def atualizar_palavra_oculta(palavra, palavra_oculta, letra): # Atualiza a palavra oculta caso esteja certo
+# def atualizar_palavra_oculta(palavra, palavra_oculta, letra): # Atualiza a palavra oculta caso esteja certo
 
-    acertou = False # Marca inicialmente que o jogador errou
+#     acertou = False # Marca inicialmente que o jogador errou
 
-    for letra_digitada in range(len(palavra)): # Percorre os índices da palavra sorteada
+#     for letra_digitada in range(len(palavra)): # Percorre os índices da palavra sorteada
 
-        if palavra[letra_digitada] == letra: # Verifica se a letra existe na palavra
+#         if palavra[letra_digitada] == letra: # Verifica se a letra existe na palavra
 
-            palavra_oculta[letra_digitada] = letra # Revela a letra na posição correta
+#             palavra_oculta[letra_digitada] = letra # Revela a letra na posição correta
 
-            acertou = True # Marca que está certo
+#             acertou = True # Marca que está certo
 
-    return acertou # Retorna True se acertou e False se errou
+#     return acertou # Retorna True se acertou e False se errou
 
 
-def verificar_vitoria(palavra_oculta): # Verifica se ainda existem "_" na palavra
+# def verificar_vitoria(palavra_oculta): # Verifica se ainda existem "_" na palavra
 
-    if "_" in palavra_oculta: # Se houver "_" na palavra oculta
+#     if "_" in palavra_oculta: # Se houver "_" na palavra oculta
 
-        return False # Ainda faltam letras para descobrir
+#         return False # Ainda faltam letras para descobrir
 
-    else: # Caso não tenha mais "_"
+#     else: # Caso não tenha mais "_"
 
-        return True # O jogador encontrou todas as letras
+#         return True # O jogador encontrou todas as letras
 
 
-def mostrar_placar(pontuacao): # Exibe a pontuação atual do jogador
+# def mostrar_placar(pontuacao): # Exibe a pontuação atual do jogador
 
-    print("\n===== PLACAR =====")
-    print(f"Pontuação: {pontuacao}") # Mostra os pontos acumulados
-    print("==================")
+#     print("\n===== PLACAR =====")
+#     print(f"Pontuação: {pontuacao}") # Mostra os pontos acumulados
+#     print("==================")
 
 
-def mostrar_historico(historico): # Exibe o histórico das partidas jogadas
+# def mostrar_historico(historico): # Exibe o histórico das partidas jogadas
 
-    print("\n===== HISTÓRICO =====") # Titulo do histórico
+#     print("\n===== HISTÓRICO =====") # Titulo do histórico
 
-    if len(historico) == 0: # Verifica se ainda não existe nenhuma partida registrada
+#     if len(historico) == 0: # Verifica se ainda não existe nenhuma partida registrada
 
-        print("Nenhuma partida registrada.") # Mostra a mensagem de aviso
+#         print("Nenhuma partida registrada.") # Mostra a mensagem de aviso
 
-    else: # Se ja existir uma partida registrada
+#     else: # Se ja existir uma partida registrada
 
-        for resultado in historico: # Percorre todos os resultados armazenados
+#         for resultado in historico: # Percorre todos os resultados armazenados
 
-            print(resultado) # Exibe os resultados do histórico
+#             print(resultado) # Exibe os resultados do histórico
 
-    print("====================") # Apenas uma separação visual
+#     print("====================") # Apenas uma separação visual
 
 
-def jogar(lista_palavras, pontuacao, historico): # Função principal responsável pela partida
+# def jogar(lista_palavras, pontuacao, historico): # Função principal responsável pela partida
 
-    palavra = sortear_palavra(lista_palavras) # Sorteia uma palavra
+#     palavra = sortear_palavra(lista_palavras) # Sorteia uma palavra
 
-    palavra_oculta = criar_palavra_oculta(palavra) # Cria os underlines da palavra
+#     palavra_oculta = criar_palavra_oculta(palavra) # Cria os underlines da palavra
 
-    letras_tentadas = [] # Lista vazia para armazenar as letras já utilizadas
+#     letras_tentadas = [] # Lista vazia para armazenar as letras já utilizadas
 
-    vidas = 5 # Quantidade de vidas inicial
+#     vidas = 5 # Quantidade de vidas inicial
 
-    while vidas > 0: # Vai Executar enquanto o jogador possuir vidas
+#     while vidas > 0: # Vai Executar enquanto o jogador possuir vidas
 
-        exibir_status(palavra_oculta, vidas, letras_tentadas) # Mostra o estado atual do jogo
+#         exibir_status(palavra_oculta, vidas, letras_tentadas) # Mostra o estado atual do jogo
 
-        letra = pedir_letra() # Solicita uma letra para o jogador
+#         letra = pedir_letra() # Solicita uma letra para o jogador
 
-        if letra in letras_tentadas: # Verifica se a letra já foi utilizada
+#         if letra in letras_tentadas: # Verifica se a letra já foi utilizada
 
-            print("\nVocê já tentou essa letra.") # Mensagem de aviso
+#             print("\nVocê já tentou essa letra.") # Mensagem de aviso
 
-            continue # Volta para o início do laço
+#             continue # Volta para o início do laço
 
-        letras_tentadas.append(letra) # Guarda a letra utilizada
+#         letras_tentadas.append(letra) # Guarda a letra utilizada
 
-        acertou = atualizar_palavra_oculta(palavra, palavra_oculta, letra) # Atualiza a palavra oculta
+#         acertou = atualizar_palavra_oculta(palavra, palavra_oculta, letra) # Atualiza a palavra oculta
 
-        if acertou: # Caso o jogador tenha acertado a palavra toda
+#         if acertou: # Caso o jogador tenha acertado a palavra toda
 
-            print("Você acertou!") # Mensagem de acerto
+#             print("Você acertou!") # Mensagem de acerto
 
-            if verificar_vitoria(palavra_oculta): # Verifica se o jogador ganhou a partida
+#             if verificar_vitoria(palavra_oculta): # Verifica se o jogador ganhou a partida
 
-                print("\nPARABÉNS! VOCÊ VENCEU!") # Mensagem de vitória
+#                 print("\nPARABÉNS! VOCÊ VENCEU!") # Mensagem de vitória
 
-                print(f"A palavra era: {palavra}") # Confirma a palavra da forca
+#                 print(f"A palavra era: {palavra}") # Confirma a palavra da forca
                 
-                pontuacao = pontuacao + 1 # Adiciona 1 pontos ao placar 
+#                 pontuacao = pontuacao + 1 # Adiciona 1 pontos ao placar 
 
-                historico.append(f"Vitória - Palavra: {palavra}") # Guarda a vitória no histórico
+#                 historico.append(f"Vitória - Palavra: {palavra}") # Guarda a vitória no histórico
 
-                return pontuacao, historico # Retorna os valores atualizados
+#                 return pontuacao, historico # Retorna os valores atualizados
                 
-        else: # Caso o jogador tenha errado
+#         else: # Caso o jogador tenha errado
 
-            vidas = vidas - 1 # Jogador perde uma vida
+#             vidas = vidas - 1 # Jogador perde uma vida
 
-            print("\nLetra incorreta!") # Mensagem que não possui a letra na palavra
+#             print("\nLetra incorreta!") # Mensagem que não possui a letra na palavra
 
-    print("\nGAME OVER!") # Mensagem que o jogador perdeu o jogo
+#     print("\nGAME OVER!") # Mensagem que o jogador perdeu o jogo
 
-    print(f"A palavra era: {palavra}") # Mostra a palavra correta da forca
+#     print(f"A palavra era: {palavra}") # Mostra a palavra correta da forca
 
-    historico.append(f"Derrota - Palavra: {palavra}") # Guarda a derrota no histórico
+#     historico.append(f"Derrota - Palavra: {palavra}") # Guarda a derrota no histórico
 
-    return pontuacao, historico # Retorna a pontuação e o histórico atualizados
-
-
-def menu_jogo(): # Função responsável pelo menu principal
-
-    palavras_sorteadas = ["GATO", "CAO", "LEAO", "TIGRE", "GIRAFA", "JACARE", "LONTRA", "ONCA", "HIENA", "ELEFANTE", "RATO", "CAVALO"] # Lista de palavras disponíveis no jogo
-
-    pontuacao = 0 # Inicio do jogo com a pontuação zero
-
-    historico = [] # Lista vazia para guardar os históricos das partidas
-
-    while True: # Deixa o menu sempre executando
-
-        print("\n┌────────────────┐")
-        print("│ ==== MENU ==== │")
-        print("│                │")
-        print("│ 1 - JOGAR      │")
-        print("│ 2 - PLACAR     │") # Mostra o menu com as opções dentro do jogo da forca
-        print("│ 3 - HISTÓRICO  │")
-        print("│ 4 - SAIR       │")
-        print("└────────────────┘")
-
-        escolha = input("\nEscolha: ") # Recebe a opção digitada pelo jogador em string
-
-        if escolha.isdigit(): # Verifica se tem apenas números(int) digitados 
-
-            escolha = int(escolha) # Converte a opção para inteiro
-
-        else: # Caso não tenha numeros
-
-            print("Digite apenas números.") # Mensagem que apenas numeros são permitidos
-
-            continue # Volta o laço while para o início do menu
-
-        if escolha == 1: # Verifica se o jogador escolheu a opção 1 (JOGAR)
-
-            pontuacao, historico = jogar(palavras_sorteadas, pontuacao, historico) # Chama a função jogar() e recebe a pontuação e históricos atualizados
-
-        elif escolha == 2: # Verifica se o jogador escolheu a opção "PLACAR"
-
-            mostrar_placar(pontuacao) # Exibe a pontuação atual do jogador
-
-        elif escolha == 3: # Verifica se o jogador escolheu a opção "HISTÓRICO"
-
-            mostrar_historico(historico) # Mostra todas as partidas registradas até o momento
-
-        elif escolha == 4: # Verifica se o jogador escolheu a opção "SAIR"
-
-            print("┌────────────────────────┐")
-            print("│   PROGRAMA ENCERRADO   │") # Mensagem de fim de programa
-            print("└────────────────────────┘")
-
-            break # Quebra o while e finaliza o programa
-
-        else: # Caso o número digitado não estiver nas opções do menu
-
-            print("Selecione uma opção válida.")  # Mensagem que a opção escolhida não existe
+#     return pontuacao, historico # Retorna a pontuação e o histórico atualizados
 
 
-# Programa principal
-menu_jogo() # Chama a função principal e inicia o jogo
+# def menu_jogo(): # Função responsável pelo menu principal
+
+#     palavras_sorteadas = ["GATO", "CAO", "LEAO", "TIGRE", "GIRAFA", "JACARE", "LONTRA", "ONCA", "HIENA", "ELEFANTE", "RATO", "CAVALO"] # Lista de palavras disponíveis no jogo
+
+#     pontuacao = 0 # Inicio do jogo com a pontuação zero
+
+#     historico = [] # Lista vazia para guardar os históricos das partidas
+
+#     while True: # Deixa o menu sempre executando
+
+#         print("\n┌────────────────┐")
+#         print("│ ==== MENU ==== │")
+#         print("│                │")
+#         print("│ 1 - JOGAR      │")
+#         print("│ 2 - PLACAR     │") # Mostra o menu com as opções dentro do jogo da forca
+#         print("│ 3 - HISTÓRICO  │")
+#         print("│ 4 - SAIR       │")
+#         print("└────────────────┘")
+
+#         escolha = input("\nEscolha: ") # Recebe a opção digitada pelo jogador em string
+
+#         if escolha.isdigit(): # Verifica se tem apenas números(int) digitados 
+
+#             escolha = int(escolha) # Converte a opção para inteiro
+
+#         else: # Caso não tenha numeros
+
+#             print("Digite apenas números.") # Mensagem que apenas numeros são permitidos
+
+#             continue # Volta o laço while para o início do menu
+
+#         if escolha == 1: # Verifica se o jogador escolheu a opção 1 (JOGAR)
+
+#             pontuacao, historico = jogar(palavras_sorteadas, pontuacao, historico) # Chama a função jogar() e recebe a pontuação e históricos atualizados
+
+#         elif escolha == 2: # Verifica se o jogador escolheu a opção "PLACAR"
+
+#             mostrar_placar(pontuacao) # Exibe a pontuação atual do jogador
+
+#         elif escolha == 3: # Verifica se o jogador escolheu a opção "HISTÓRICO"
+
+#             mostrar_historico(historico) # Mostra todas as partidas registradas até o momento
+
+#         elif escolha == 4: # Verifica se o jogador escolheu a opção "SAIR"
+
+#             print("┌────────────────────────┐")
+#             print("│   PROGRAMA ENCERRADO   │") # Mensagem de fim de programa
+#             print("└────────────────────────┘")
+
+#             break # Quebra o while e finaliza o programa
+
+#         else: # Caso o número digitado não estiver nas opções do menu
+
+#             print("Selecione uma opção válida.")  # Mensagem que a opção escolhida não existe
+
+
+# # Programa principal
+# menu_jogo() # Chama a função principal e inicia o jogo
+
+# ----------------------------------------------------------------------------------------------------------------------------
+
+# Sistema de Controle de Estoque e Vendas
+
+
+# Base de Dados em Memória: Utilizar um dicionário principal (onde a chave é o ID único do
+# registro e o valor é um dicionário secundário com os detalhes) para simular o banco de dados
+# do sistema.
+
+def banco_dados(id, detalhes):
+
+    estoque = {
+
+        "id 006": {"Nome" : "Ssd",
+        "Quantidade" : 11,
+        "Valor" : 590},
+
+        "id 005": {"Nome" : "Processador",
+        "Quantidade" : 8,
+        "Valor" : 380},
+
+        "id 004": {"Nome" : "Teclado",
+        "Quantidade" : 31,
+        "Valor" : 75},
+
+        "id 003": {"Nome" : "Mouse",
+         "Quantidade" : 25,
+         "Valor" : 50},
+
+        "id 002": {"Nome" : "Gabinete",
+        "Quantidade" : 13,
+        "Valor" : 130},
+
+        "id 001": {"Nome" : "Monitor",
+        "Quantidade" : 10,
+        "Valor" : 400}
+
+    }
+
+def sistema():
+
+    while True:
+
+        print("┌────────────────────┐")
+        print("│  LOJA INFORMATICA  │")
+        print("│                    │")
+        print("│                    │")
+        print("│                    │")
+        print("│ 1 - CADASTRO       │")
+        print("│ 2 - ESTOQUE        │") 
+        print("│ 3 - VENDAS         │")
+        print("│ 4 - SAIR           │")
+        print("└────────────────────┘")
+
+        try:
+            escolha = int(input("Escolha: "))   
+        except ValueError:
+             print("\nSelecione apenas as opções disponíveis!")
+             continue
+        
+        if escolha == 1:
+            print("\n┌────────────────────┐")
+            print("│  === CADASTRO ===  │")
+            print("└────────────────────┘")
+
+            nome_produto = input("\nNome do Produto: ").title()
+            try:
+                qnt_produto = int(input("Quantidade: "))
+                valor = int(input("Valor: "))
+            except ValueError:
+                print("Digite a quantidade em NUMEROS!")
+                correcao = int(input("R: "))
+                continue
+
+        
+              
+
+
+sistema()

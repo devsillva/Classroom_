@@ -2071,16 +2071,29 @@ def cadastro():
 
         while True:
             try:
-                valor = float(input("Valor: R$"))
+                valor_novo_produto = float(input("Valor: R$"))
             except ValueError:
                 print("Digite o valor em NUMEROS!")
                 continue
+            
+            novo_cadastro = banco_dados()   
+            
+            novo_id = len(novo_cadastro) + 1
+            
+            novo_produto = {"Nome" : nome_produto, "Quantidade" : qnt_produto, "Valor" : valor_novo_produto}
+
+            novo_cadastro[novo_id] = novo_produto
+
+            print(novo_cadastro)
 
             print("\nProduto registrado com sucesso!")
 
             print(f"\nNome do produto: {nome_produto}")
             print(f"Quantidade: {qnt_produto}")
-            print(f"Valor: {valor:.2f}")
+            print(f"Valor: {valor_novo_produto:.2f}")
+
+
+            
             break
         break
 
@@ -2093,20 +2106,23 @@ def estoque():
     # for produto in banco_dados():
     #     print(f"{id}")
 
-def vendas():
+def retirada():
         
-    print("\n┌─────────────────────┐")
-    print("│  === RETIRADA ===   │")
-    print("└─────────────────────┘")
+    print("\n┌────────────────────┐")
+    print("│  === RETIRADA ===  │")
+    print("└────────────────────┘")
 
     produtos = banco_dados()
 
-    for id, produto in produtos.items():
-        print(f"\nID: {id} | {produto["Nome"]} | Qtd: {produto["Quantidade"]} | R${produto["Valor"]:.2f}")
+    for id, valor in produtos.items():
+        print(f"\nID: {id} | {valor["Nome"]} | Qtd: {valor["Quantidade"]} | R${valor["Valor"]:.2f}")
     
-    item = input("\nQual item(ID) será retirado?: ").capitalize()
+    try:
+        item = input("\nQual item (ID) será retirado?: ").capitalize()
+    except ValueError:
+        print("\nDigite apenas o ID do produto!")
     
-    while item not in estoque:
+    while item not in produtos:
         print("Item não encontrado")
         item = input("Qual item será vendido?: ").capitalize()
         print(f"Quantidade em estoque: {estoque[item]}")
@@ -2165,6 +2181,6 @@ def sistema():
         elif escolha == 2:
             estoque()
         elif escolha == 3:
-            vendas()
+            retirada()
             
 sistema()

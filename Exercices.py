@@ -2026,31 +2026,33 @@ def banco_dados():
 
     estoque = {
 
-        "id 006": {"Nome" : "Ssd",
+        6: {"Nome" : "Ssd",
         "Quantidade" : 11,
         "Valor" : 590},
 
-        "id 005": {"Nome" : "Processador",
+        5: {"Nome" : "Processador",
         "Quantidade" : 8,
         "Valor" : 380},
 
-        "id 004": {"Nome" : "Teclado",
+        4: {"Nome" : "Teclado",
         "Quantidade" : 31,
         "Valor" : 75},
 
-        "id 003": {"Nome" : "Mouse",
+        3: {"Nome" : "Mouse",
          "Quantidade" : 25,
          "Valor" : 50},
 
-        "id 002": {"Nome" : "Gabinete",
+        2: {"Nome" : "Gabinete",
         "Quantidade" : 13,
         "Valor" : 130},
 
-        "id 001": {"Nome" : "Monitor",
+        1: {"Nome" : "Monitor",
         "Quantidade" : 10,
         "Valor" : 400}
 
     }
+    return estoque
+
 
 def cadastro():
     
@@ -2069,7 +2071,7 @@ def cadastro():
 
         while True:
             try:
-                valor = float(input("Valor: "))
+                valor = float(input("Valor: R$"))
             except ValueError:
                 print("Digite o valor em NUMEROS!")
                 continue
@@ -2088,8 +2090,54 @@ def estoque():
     print("│  === ESTOQUE ===  │")
     print("└───────────────────┘")
 
-    
+    # for produto in banco_dados():
+    #     print(f"{id}")
 
+def vendas():
+        
+    print("\n┌─────────────────────┐")
+    print("│  === RETIRADA ===   │")
+    print("└─────────────────────┘")
+
+    produtos = banco_dados()
+
+    for id, produto in produtos.items():
+        print(f"\nID: {id} | {produto["Nome"]} | Qtd: {produto["Quantidade"]} | R${produto["Valor"]:.2f}")
+    
+    item = input("\nQual item(ID) será retirado?: ").capitalize()
+    
+    while item not in estoque:
+        print("Item não encontrado")
+        item = input("Qual item será vendido?: ").capitalize()
+        print(f"Quantidade em estoque: {estoque[item]}")
+        while True:
+            try:
+                sub = int(input("\nAgora digite quantas unidades serão vendidas: "))
+
+                if sub <= 0:
+                    print("Digite uma quantidade maior que zero.")
+                    continue
+
+                if sub > estoque[item]:
+                    print("Quantidade maior que a disponível no estoque.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("Digite apenas números inteiros.")
+
+    if item in estoque:
+        sub = int(input("\nAgora digite quantas unidades serão vendidas: "))
+
+    while sub >= estoque[item]:
+        print("Quantidade maior que disponivel no estoque")
+        sub = int(input("Agora digite quantas unidades serão vendidas: "))
+        
+    if sub <= estoque[item]:
+        print(f"\nQuantidade do item atualizado no sistema com SUCESSO!")
+    item_estoque = (f"Foram vendidas {sub} unidades do(a) {item}")
+    estoque.append(item_estoque)
 
 def sistema():
 
@@ -2102,7 +2150,7 @@ def sistema():
         print("│                    │")
         print("│ 1 - CADASTRO       │")
         print("│ 2 - ESTOQUE        │") 
-        print("│ 3 - VENDAS         │")
+        print("│ 3 - RETIRADA       │")
         print("│ 4 - SAIR           │")
         print("└────────────────────┘")
 
@@ -2116,9 +2164,7 @@ def sistema():
             cadastro()
         elif escolha == 2:
             estoque()
-
-
-
-
+        elif escolha == 3:
+            vendas()
+            
 sistema()
-

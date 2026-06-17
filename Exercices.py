@@ -2017,45 +2017,41 @@ escreva(mensagem)
 
 # Sistema de Controle de Estoque e Vendas
 
+# Base de Dados em Memória: dicionário principal criado UMA VEZ, fora de qualquer função.
+# Como dicionário é mutável, ele pode ser passado como parâmetro para as funções e
+# qualquer alteração feita dentro delas permanece depois que a função termina.
 
-# Base de Dados em Memória: Utilizar um dicionário principal (onde a chave é o ID único do
-# registro e o valor é um dicionário secundário com os detalhes) para simular o banco de dados
-# do sistema.
+estoque = {
 
-def banco_dados():
+    1: {"Nome" : "Ssd",
+    "Quantidade" : 11,
+    "Valor" : 590},
 
-    estoque = {
+    2: {"Nome" : "Processador",
+    "Quantidade" : 8,
+    "Valor" : 380},
 
-        6: {"Nome" : "Ssd",
-        "Quantidade" : 11,
-        "Valor" : 590},
+    3: {"Nome" : "Teclado",
+    "Quantidade" : 31,
+    "Valor" : 75},
 
-        5: {"Nome" : "Processador",
-        "Quantidade" : 8,
-        "Valor" : 380},
+    4: {"Nome" : "Mouse",
+     "Quantidade" : 25,
+     "Valor" : 50},
 
-        4: {"Nome" : "Teclado",
-        "Quantidade" : 31,
-        "Valor" : 75},
+    5: {"Nome" : "Gabinete",
+    "Quantidade" : 13,
+    "Valor" : 130},
 
-        3: {"Nome" : "Mouse",
-         "Quantidade" : 25,
-         "Valor" : 50},
+    6: {"Nome" : "Monitor",
+    "Quantidade" : 10,
+    "Valor" : 400}
 
-        2: {"Nome" : "Gabinete",
-        "Quantidade" : 13,
-        "Valor" : 130},
-
-        1: {"Nome" : "Monitor",
-        "Quantidade" : 10,
-        "Valor" : 400}
-
-    }
-    return estoque
+}
 
 
-def cadastro():
-    
+def cadastro(produtos):
+
     print("\n┌────────────────────┐")
     print("│  === CADASTRO ===  │")
     print("└────────────────────┘")
@@ -2071,116 +2067,124 @@ def cadastro():
 
         while True:
             try:
-                valor_novo_produto = float(input("Valor: R$"))
+                valor_novo_produto = float(input("Valor: R$ "))
             except ValueError:
                 print("Digite o valor em NUMEROS!")
                 continue
-            
-            novo_cadastro = banco_dados()   
-            
-            novo_id = len(novo_cadastro) + 1
-            
-            novo_produto = {"Nome" : nome_produto, "Quantidade" : qnt_produto, "Valor" : valor_novo_produto}
 
-            novo_cadastro[novo_id] = novo_produto
+            novo_id = len(produtos) + 1
 
-            print(novo_cadastro)
+            novo_item = {"Nome" : nome_produto, "Quantidade" : qnt_produto, "Valor" : valor_novo_produto}
+
+            produtos[novo_id] = novo_item
 
             print("\nProduto registrado com sucesso!")
 
             print(f"\nNome do produto: {nome_produto}")
             print(f"Quantidade: {qnt_produto}")
-            print(f"Valor: {valor_novo_produto:.2f}")
+            print(f"Valor: R$ {valor_novo_produto:.2f}")
 
-
-            
             break
         break
 
-def estoque():
+    retornar_menu = input("\nDeseja retornar ao menu? (s/n)\nR: ").lower()
+
+    if retornar_menu == "s":
+        return
+    else:
+        print("\n┌───────────────────┐")
+        print("│  FIM DO PROGRAMA  │")
+        print("└───────────────────┘")
+            
+def mostrar_estoque(produtos):
 
     print("\n┌───────────────────┐")
     print("│  === ESTOQUE ===  │")
     print("└───────────────────┘")
 
-    # for produto in banco_dados():
-    #     print(f"{id}")
+    for id, valor in produtos.items():
+        print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")
 
-def retirada():
-        
+
+def retirada(produtos):
+
     print("\n┌────────────────────┐")
     print("│  === RETIRADA ===  │")
     print("└────────────────────┘")
 
-    produtos = banco_dados()
-
     for id, valor in produtos.items():
-        print(f"\nID: {id} | {valor["Nome"]} | Qtd: {valor["Quantidade"]} | R${valor["Valor"]:.2f}")
-    
-    try:
-        item = input("\nQual item (ID) será retirado?: ").capitalize()
-    except ValueError:
-        print("\nDigite apenas o ID do produto!")
-    
-    while item not in produtos:
-        print("Item não encontrado")
-        item = input("Qual item será vendido?: ").capitalize()
-        print(f"Quantidade em estoque: {estoque[item]}")
-        while True:
-            try:
-                sub = int(input("\nAgora digite quantas unidades serão vendidas: "))
+        print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")
 
-                if sub <= 0:
-                    print("Digite uma quantidade maior que zero.")
-                    continue
+    while True:
+        try:
+            id = int(input("\nQual item (ID) será retirado?: "))
+        except ValueError:
+            print("\nDigite apenas o ID (número) do produto!")
+            continue
 
-                if sub > estoque[item]:
-                    print("Quantidade maior que a disponível no estoque.")
-                    continue
+        if id not in produtos:
+            print("Item não encontrado.")
+            continue
 
-                break
+        break
 
-            except ValueError:
-                print("Digite apenas números inteiros.")
+    nome_produto = produtos[id]["Nome"]
+    print(f"Quantidade em estoque: {produtos[id]["Quantidade"]}")
 
-    if item in estoque:
-        sub = int(input("\nAgora digite quantas unidades serão vendidas: "))
+    while True:
+        try:
+            sub = int(input("\nAgora digite quantas unidades serão retiradas: "))
+        except ValueError:
+            print("Digite apenas números inteiros.")
+            continue
 
-    while sub >= estoque[item]:
-        print("Quantidade maior que disponivel no estoque")
-        sub = int(input("Agora digite quantas unidades serão vendidas: "))
-        
-    if sub <= estoque[item]:
-        print(f"\nQuantidade do item atualizado no sistema com SUCESSO!")
-    item_estoque = (f"Foram vendidas {sub} unidades do(a) {item}")
-    estoque.append(item_estoque)
+        if sub <= 0:
+            print("Digite uma quantidade maior que zero.")
+            continue
+
+        if sub > produtos[id]["Quantidade"]:
+            print("Quantidade maior que a disponível no estoque.")
+            continue
+
+        break
+
+    produtos[id]["Quantidade"] -= sub
+    print(f"\nForam retiradas {sub} unidades de {nome_produto}. Quantidade atualizada no sistema com SUCESSO!")
 
 def sistema():
 
     while True:
 
-        print("┌────────────────────┐")
+        print("\n┌────────────────────┐")
         print("│  LOJA INFORMATICA  │")
         print("│                    │")
         print("│                    │")
         print("│                    │")
         print("│ 1 - CADASTRO       │")
-        print("│ 2 - ESTOQUE        │") 
+        print("│ 2 - ESTOQUE        │")
         print("│ 3 - RETIRADA       │")
         print("│ 4 - SAIR           │")
         print("└────────────────────┘")
 
         try:
-            escolha = int(input("Escolha: "))   
+            escolha = int(input("Escolha: "))
         except ValueError:
-             print("\nSelecione apenas as opções disponíveis!")
-             continue
-        
+            print("\nSelecione apenas as opções disponíveis!")
+            continue
+
         if escolha == 1:
-            cadastro()
+            cadastro(estoque)
         elif escolha == 2:
-            estoque()
+            mostrar_estoque(estoque)
         elif escolha == 3:
-            retirada()
-            
+            retirada(estoque)
+        elif escolha == 4:
+            print("\n┌───────────────────┐")
+            print("│  FIM DO PROGRAMA  │")
+            print("└───────────────────┘")
+            break
+        else:
+            print("\nSelecione apenas as opções disponíveis!")
+
+
 sistema()

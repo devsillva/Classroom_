@@ -2015,24 +2015,27 @@ escreva(mensagem)
 
 # ----------------------------------------------------------------------------------------------------------------------------
 
+
 # Sistema de Controle de Estoque e Vendas
 
 # Base de Dados em Memória: dicionário principal criado UMA VEZ, fora de qualquer função.
 # Como dicionário é mutável, ele pode ser passado como parâmetro para as funções e
 # qualquer alteração feita dentro delas permanece depois que a função termina.
 
-estoque = {
 
+estoque = { # Criação do dicionario principal que servirá de parâmetro para as outras funções
+
+   #id : "valores"
     1: {"Nome" : "Ssd",
     "Quantidade" : 11,
     "Valor" : 590},
-
+-
     2: {"Nome" : "Processador",
     "Quantidade" : 8,
     "Valor" : 380},
 
     3: {"Nome" : "Teclado",
-    "Quantidade" : 31,
+    "Quantidade" : 31,       # dicionarios secundarios com os "id" de chave para acessar os valores, que são os dados dos produtos 
     "Valor" : 75},
 
     4: {"Nome" : "Mouse",
@@ -2046,43 +2049,53 @@ estoque = {
     6: {"Nome" : "Monitor",
     "Quantidade" : 10,
     "Valor" : 400}
-
 }
 
-
-def cadastro(produtos):
+def cadastro(produtos): # Função de cadastro dos produtos do sistema
 
     print("\n┌────────────────────┐")
-    print("│  === CADASTRO ===  │")
+    print("│  === CADASTRO ===  │") # Titulo da opção de cadastro
     print("└────────────────────┘")
 
-    nome_produto = input("\nNome do Produto: ").title()
+    nome_produto = input("\nNome do Produto: ").title() # Variavel que guarda o nome do novo produto que será cadastrado
 
-    while True:
-        try:
-            qnt_produto = int(input("Quantidade: "))
-        except ValueError:
-            print("Digite a quantidade em NUMEROS!")
-            continue
+    while True: # Repete até que o usuario digite uma entrada valida
 
-        while True:
-            try:
-                valor_novo_produto = float(input("Valor: R$ "))
-            except ValueError:
-                print("Digite o valor em NUMEROS!")
-                continue
+        try: # Tenta executar o codigo abaixo
 
-            novo_id = len(produtos) + 1
+            qnt_produto = int(input("Quantidade: ")) # Variavel que guarda a quantidade de estoque do novo produto em (int)
 
-            novo_item = {"Nome" : nome_produto, "Quantidade" : qnt_produto, "Valor" : valor_novo_produto}
+        except ValueError: # Caso o usuario digite um valor que gere o "ValueError" (não seja int) 
 
-            produtos[novo_id] = novo_item
+            print("Digite a quantidade em NUMEROS!") # repete essa mensagem até que o usuario digite uma entrada valida
 
-            print("\nProduto registrado com sucesso!")
+            continue # Caso a entreda esteja correta ele continua
+
+        while True: # Outro while para ficar no loop até digitar uma entrada válida
+
+            try: # Tenta executar o codigo abaixo
+
+                preco = float(input("Valor: R$ ")) # Variavel que quarda o preço do novo produto ja convertido em float
+
+            except ValueError: # Caso o usuario digite uma string que gere o "ValueError"
+                
+                print("Digite o valor em NUMEROS!") # Mostra essa mensagem em loop até que uma entrada valida seja feita
+
+                continue # Apos a entrada valida ele continua
+
+            novo_id = len(produtos) + 1 # O novo id que sera criado no novo produto sera a contagem (len) do parametro "produtos" (estoque) +1
+
+            novo_item = {"Nome" : nome_produto, "Quantidade" : qnt_produto, "Valor" : preco} # A variavel "novo_item" vai guardar o dicionario com os valores do novo produto cadastrado
+
+            produtos[novo_id] = novo_item # O parametro "produtos" vai receber a variavel "novo_id" (chave do discinario = id) que vai ter como valor a variavel "novo_item"
+
+            print("\nProduto registrado com sucesso!") # Mostra mensagem de sucesso no cadastro
 
             print(f"\nNome do produto: {nome_produto}")
+
             print(f"Quantidade: {qnt_produto}")
-            print(f"Valor: R$ {valor_novo_produto:.2f}")
+
+            print(f"Valor: R$ {preco:.2f}")
 
             break
         break
@@ -2104,7 +2117,6 @@ def mostrar_estoque(produtos):
 
     for id, valor in produtos.items():
         print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")
-
 
 def retirada(produtos):
 

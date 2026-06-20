@@ -2051,6 +2051,7 @@ estoque = { # Criação do dicionario principal que servirá de parâmetro para 
     "Valor" : 400}
 }
 
+
 def cadastro(produtos): # Função de cadastro dos produtos do sistema
 
     print("\n┌────────────────────┐")
@@ -2091,112 +2092,140 @@ def cadastro(produtos): # Função de cadastro dos produtos do sistema
 
             print("\nProduto registrado com sucesso!") # Mostra mensagem de sucesso no cadastro
 
-            print(f"\nNome do produto: {nome_produto}")
+            print(f"\nNome do produto: {nome_produto}") # Mostra o nome do produto inserido na variavel "nome_produto"
 
-            print(f"Quantidade: {qnt_produto}")
+            print(f"Quantidade: {qnt_produto}") # Mostra a quantidade em estoque na variavel "qnt_produto"
 
-            print(f"Valor: R$ {preco:.2f}")
+            print(f"Valor: R$ {preco:.2f}") # Mostra o preco do produto na variavel "preco" e mostra 2 casas decimais apos a virgula
 
-            break
-        break
+            break # Quebra o loop
+        break # Quebra o loop
 
-    retornar_menu = input("\nDeseja retornar ao menu? (s/n)\nR: ").lower()
 
-    if retornar_menu == "s":
-        return
-    else:
-        print("\n┌───────────────────┐")
-        print("│  FIM DO PROGRAMA  │")
-        print("└───────────────────┘")
-            
-def mostrar_estoque(produtos):
+def mostrar_estoque(produtos): # Função para mostrar os produtos em estoque usando o parametro "produtos"
 
     print("\n┌───────────────────┐")
-    print("│  === ESTOQUE ===  │")
+    print("│  === ESTOQUE ===  │") # Titulo da opção de estoque
     print("└───────────────────┘")
 
-    for id, valor in produtos.items():
-        print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")
+    for id, valor in produtos.items(): # Para cada par de chave, valor dentro de produtos
 
-def retirada(produtos):
+        print(f"\nID: {id} | {valor["Nome"]} | Qtd: {valor["Quantidade"]} | R${valor["Valor"]:.2f}") # Mostra o id (chave) e os valores de cada dicinario dentro de "produtos" (estoque)
+
+
+def retirada(produtos): # Função para realizar a retirada de items dentro de "produtos" (estoque)
 
     print("\n┌────────────────────┐")
-    print("│  === RETIRADA ===  │")
+    print("│  === RETIRADA ===  │") # titulo da opção de retirada
     print("└────────────────────┘")
 
-    for id, valor in produtos.items():
-        print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")
+    for id, valor in produtos.items(): # Para cada par de chave, valor dentro de produtos
 
-    while True:
-        try:
-            id = int(input("\nQual item (ID) será retirado?: "))
-        except ValueError:
-            print("\nDigite apenas o ID (número) do produto!")
-            continue
+        print(f"\nID: {id} | {valor['Nome']} | Qtd: {valor['Quantidade']} | R${valor['Valor']:.2f}")  # Mostra o id (chave) e os valores de cada dicinario dentro de "produtos" (estoque)
 
-        if id not in produtos:
-            print("Item não encontrado.")
-            continue
+    while True: # laço while para ficar no loop até digitar uma entrada válida
 
-        break
+        try: # Tenta executar o codigo abaixo
 
-    nome_produto = produtos[id]["Nome"]
-    print(f"Quantidade em estoque: {produtos[id]["Quantidade"]}")
+            id = int(input("\nQual item (ID) será retirado?: ")) # Variavel que guarda qual o numero de id que sera retirado
 
-    while True:
-        try:
-            sub = int(input("\nAgora digite quantas unidades serão retiradas: "))
-        except ValueError:
-            print("Digite apenas números inteiros.")
-            continue
+        except ValueError: # Caso o usuario tente digitar uma string ou float que gere o "ValueError"
 
-        if sub <= 0:
-            print("Digite uma quantidade maior que zero.")
-            continue
+            print("\nDigite apenas o ID (número) do produto!") # Mostra essa mensagem em loop até uma entrada valida
 
-        if sub > produtos[id]["Quantidade"]:
-            print("Quantidade maior que a disponível no estoque.")
-            continue
+            continue # Caso seja validado continua
 
-        break
+        if id not in produtos: # Se o numero de id que foi digitado não esteja dentro de produtos
 
-    produtos[id]["Quantidade"] -= sub
-    print(f"\nForam retiradas {sub} unidades de {nome_produto}. Quantidade atualizada no sistema com SUCESSO!")
+            print("Item não encontrado.") # Mostra a mensagem em loop até uma entrada valida
 
-def sistema():
+            continue # Caso seja valido continua
 
-    while True:
+        break # Quebra o loop
+
+    item_retirado = produtos[id]["Nome"] # Variavel guarda o valor(nome) do id que o usuario digitou 
+
+    print(f"Quantidade em estoque: {produtos[id]["Quantidade"]}") # Informa a quantidade de itens daquele id que estão disponiveis
+
+    while True: # Abre um laço de repetição
+
+        try: # Tenta executar o codigo abaixo
+
+            sub = int(input("\nAgora digite quantas unidades serão retiradas: ")) # A variavel guarda a quantidade (int) de quantos items serao retirados
+
+        except ValueError: # Caso o usuario digite uma entrada que gere o "ValueError"
+
+            print("Digite apenas números inteiros.") # Mostra essa mensagem em loop até que seja feito uma entrada valida
+
+            continue # Caso seja valido continua
+
+        if sub <= 0: # Se sub for menor ou igual a 0
+
+            print("Digite uma quantidade maior que zero.") # Mostra essa mensagem em loop até digitar uma quantidade maior
+
+            continue # Assim que digitar segue para a proxima verificação
+
+        if sub > produtos[id]["Quantidade"]: # Se a quantidade que o usuario digitou for maior que a quantidade disponivel 
+
+            print("Quantidade maior que a disponível no estoque.") # Mostra essa mensagem em loop até que ele selecione uma opção menor que a disponivel
+
+            continue # Assim que digitar continua
+
+        break # Quebra o loop
+
+    produtos[id]["Quantidade"] -= sub # A quantidade do item que o usuario selecionou vai ser igual a ele mesmo - a quantidade retirada (sub)
+
+    print(f"\nForam retiradas {sub} unidades de {item_retirado}. Quantidade atualizada no sistema com SUCESSO!") # Mensagem da quantidade retirada e nome do produto selecionado
+
+def sistema(): # Função principal do sistema
+
+    while True: # Abre o laço while
 
         print("\n┌────────────────────┐")
         print("│  LOJA INFORMATICA  │")
         print("│                    │")
         print("│                    │")
-        print("│                    │")
+        print("│                    │") # Mostra o menu do sistema com as opções de escolha
         print("│ 1 - CADASTRO       │")
         print("│ 2 - ESTOQUE        │")
         print("│ 3 - RETIRADA       │")
         print("│ 4 - SAIR           │")
         print("└────────────────────┘")
 
-        try:
-            escolha = int(input("Escolha: "))
-        except ValueError:
-            print("\nSelecione apenas as opções disponíveis!")
-            continue
+        try: # Tenta executar o codigo abaixo
 
-        if escolha == 1:
-            cadastro(estoque)
-        elif escolha == 2:
-            mostrar_estoque(estoque)
-        elif escolha == 3:
-            retirada(estoque)
-        elif escolha == 4:
+            escolha = int(input("Escolha: ")) # Variavel que guarda a escolha do menu inicial em (int)
+
+        except ValueError: # Caso o usuario digite uma entrada que gere o "ValueError"
+
+            print("\nSelecione apenas as opções disponíveis!") # Mostra essa mensagem em loop até que seja feito uma entrada valida
+
+            continue # Caso a entrada seja valida, continua
+
+        if escolha == 1: # Se o usuario digitar "1" 
+
+            cadastro(estoque) # Chama a função com o estoque como parametro para fazer as movimentações dos protudos cadastrados
+
+        elif escolha == 2: # Se o usuario digitar "2" 
+
+            mostrar_estoque(estoque) # # Chama a função com o estoque como parametro para fazer as movimentações dos protudos em estoque
+
+        elif escolha == 3: # Se o usuario digitar "3" 
+
+            retirada(estoque) # Chama a função com o estoque como parametro para fazer as movimentações dos que vao sair do estoque
+
+        elif escolha == 4: # Se o usuario digitar "4" 
+
             print("\n┌───────────────────┐")
-            print("│  FIM DO PROGRAMA  │")
+            print("│  FIM DO PROGRAMA  │") # Monstra mensagem de fum do programa
             print("└───────────────────┘")
-            break
-        else:
-            print("\nSelecione apenas as opções disponíveis!")
 
+            break # Quebra o laço de repetição do menu
 
-sistema()
+        else: # Caso contrario
+
+            print("\nSelecione apenas as opções disponíveis!") # Permanece em loop até uma entrada valida
+
+# Função principal do sistema #
+
+sistema() # Chama a função principal e inicia o sistema de Controle de Estoque e Vendas
